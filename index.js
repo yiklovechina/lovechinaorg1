@@ -103,7 +103,8 @@ server.post('/lovechinainsert', (req, res) => {
 		res.end()
 	})
 })
-//end of insert data
+
+//end of insert data 
 
 //server remove
 //view by admin 
