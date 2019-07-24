@@ -36,7 +36,7 @@ exports.getlovechinaDetailXY = data => new Promise( (resolve, reject) => {
 })
 
 exports.insertReportData = details => new Promise( (resolve, reject) => {
-    if (!'name' in details && !'type' in details && !'address' in details && !'evidence' in details) {
+    if (!'name' in details && !'type' in details && !'address' in details && !'evidence' in details && !`description` in details) {
         reject(new Error('missing attribute'))
     } else {
         const NgLoveChina = new schema.NgLoveChina(details)
@@ -50,7 +50,7 @@ exports.insertReportData = details => new Promise( (resolve, reject) => {
 })
 
 exports.insertData = details => new Promise( (resolve, reject) => {
-    if (!'name' in details && !'type' in details && !'address' in details && !'description' in details && !'X' in details && !'Y' in details) {
+    if (!'name' in details && !'type' in details && !'address' in details && !'evidence' in details && !'X' in details && !'Y' in details && !`description` in detail) {
         reject(new Error('missing attribute'))
     } else {
         const LoveChina = new schema.LoveChina(details)

@@ -11,9 +11,10 @@ const lovechinaschema = new Schema({
         name: String,
         address: String,
         type: String,
-        description: String,
+        evidence: String,
         X: Number,
-        Y: Number
+        Y: Number,
+        description: String
 })
 exports.LoveChina = mongoose.model('LoveChina', lovechinaschema)
 
@@ -21,6 +22,8 @@ const nglovechinaschema = new Schema({
         name: String,
         address: String,
         type: String,
-        evidence: String
+        evidence: String,
+        description: String
+
 })
 exports.NgLoveChina = mongoose.model('NgLoveChina',nglovechinaschema)
