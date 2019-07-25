@@ -90,9 +90,10 @@ exports.getlovechina = (request, datagf) => new Promise( (resolve, reject) => {
         	name: element.name,
             address: element.address,
             type: element.type,
-            description: element.description,
-            x: element.X,
-            y: element.Y
+            evidence: element.evidence,
+            X: element.X,
+            Y: element.Y,
+            description: element.description
 		}
 	})
 	resolve({results: clean})

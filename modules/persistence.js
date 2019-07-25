@@ -4,7 +4,7 @@
 const schema = require('../schema/mongosetting')
 
 exports.getlovechinaDetailtype = type => new Promise( (resolve, reject) => {
-	schema.LoveChina.find({type: type}, (err, docs) => {
+	schema.LoveChina.find({type:type}, (err, docs) => {
 		if (err) reject(new Error('database error'))
 		resolve(docs)
 	})
@@ -17,19 +17,21 @@ exports.getlovechinaDetailname = name => new Promise( (resolve, reject) => {
 	})
 })
 
+// Number Type can not search by normal method
 exports.getlovechinaDetailXY = data => new Promise( (resolve, reject) => {
-	schema.LoveChina.find({ $and:[ {
-        X: {
-            $gt: data.X - 0.05,
-            $lt: data.X + 0.05
-        }
-    },{ Y: {
-        $gt: data.Y - 0.05,
-        $lt: data.Y + 0.05
-    }
-    }]
-    }, (err, docs) => {
-		if (err) reject(new Error('database error'))
+    console.log(data.X)
+    console.log(data.Y)
+    schema.LoveChina.find({$and:[{
+    X: {
+    $gte: parseFloat(data.X) - 0.02,
+    $lt: parseFloat(data.X) + 0.02
+}, Y: {
+    $gte: parseFloat(data.Y) - 0.02,
+    $lt: parseFloat(data.Y) + 0.02
+}}]} 
+    , (err, docs) => {
+        if (err) reject(new Error('database error'))
+        console.log(docs)
 		resolve(docs)
     })
     

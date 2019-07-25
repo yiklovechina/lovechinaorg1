@@ -1,7 +1,7 @@
 'use strict'
-
 // import the mongoose package
 const mongoose = require('mongoose')
+
 mongoose.connect("mongodb://localhost:27017/lovechina")
 
 mongoose.Promise = global.Promise
@@ -17,6 +17,8 @@ const lovechinaschema = new Schema({
         description: String
 })
 exports.LoveChina = mongoose.model('LoveChina', lovechinaschema)
+
+// create a model using the schema
 
 const nglovechinaschema = new Schema({
         name: String,
