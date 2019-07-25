@@ -63,7 +63,8 @@ exports.insertData = (request, callback) => {
     .then(Y => data.Y = Y)
     .then( () => extractBodyKey(request,'description'))
     .then(description => data.description = description)
-	.then(() => persistence.insertData(data))
+    .then(() => persistence.checkdata(data))
+	.then(checker => persistence.insertData(data,checker))
 	.then(data => {callback(null,data)})
 	.catch( err => {callback(err)})
 }
@@ -77,9 +78,8 @@ const extractParam = (request, param) => new Promise( (resolve, reject) => {
 
 //for post key
 const extractBodyKey = (request, key) => new Promise( (resolve, reject) => {
-	if (request.body === undefined || request.body[key] === undefined) reject(new Error(`missing key ${key} in request body`))
-	if (request.body[key] === "") reject(new Error(`${key} can not be null`))
-	resolve(request.body[key])
+    if (request.body === undefined || request.body[key] === undefined) reject(new Error(`missing key ${key} in request body`))
+    resolve(request.body[key])
 })
 //for post key
 

@@ -1,13 +1,13 @@
 let MongoClient = require('mongodb').MongoClient;
 let url = "mongodb://localhost:27017/";
 
-const csvFilePath='Data3.csv'
+const csvFilePath='Data2.csv'
 const csv=require('csvtojson')
 
 csv({
 	colParser:{
-		"X":"number",
-		"Y":"number",
+		"X":"Number",
+		"Y":"Number"
 		}
 })
 .fromFile(csvFilePath)
