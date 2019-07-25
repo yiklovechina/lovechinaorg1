@@ -1,7 +1,7 @@
 let MongoClient = require('mongodb').MongoClient;
 let url = "mongodb://localhost:27017/";
 
-const csvFilePath='Data2.csv'
+const csvFilePath='Data3.csv'
 const csv=require('csvtojson')
 
 csv({
@@ -26,4 +26,10 @@ csv({
 		db.close();
 	  });
 	});
+})
+
+const extractBodyKey = (request, key) => new Promise( (resolve, reject) => {
+	if (request.body === undefined || request.body[key] === undefined) reject(new Error(`missing key ${key} in request body`))
+	if (request.body[key] === "") reject(new Error(`${key} can not be null`))
+	resolve(request.body[key])
 })
