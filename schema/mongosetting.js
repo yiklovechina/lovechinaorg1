@@ -14,18 +14,21 @@ const lovechinaschema = new Schema({
         evidence: Array,
         X: Number,
         Y: Number,
-        description: Array
+        description: Array,
+        status: String
 })
 exports.LoveChina = mongoose.model('LoveChina', lovechinaschema)
 
 // create a model using the schema
 
-const nglovechinaschema = new Schema({
+const lovehkschema = new Schema({
         name: String,
         address: String,
         type: String,
         evidence: Array,
-        description: Array
-
+        X: Number,
+        Y: Number,
+        description: Array,
+        status: String
 })
-exports.NgLoveChina = mongoose.model('NgLoveChina',nglovechinaschema)
+exports.Lovehk = mongoose.model('Lovehk',lovehkschema)

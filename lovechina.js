@@ -29,24 +29,6 @@ exports.getDetailbyXY = (request, callback) => {
 	.then( lovechina => callback(null, lovechina))
 	.catch( err => callback(err))
 }
-
-exports.reportData = (request, callback) => {
-    let data = {}
-	extractBodyKey(request, 'name')
-	.then(name => data.name = name)
-	.then (()=> extractBodyKey(request,'address'))
-	.then(address => data.address = address)
-	.then (()=>  extractBodyKey(request,'type'))
-	.then(type => data.type = type)
-	.then (()=> extractBodyKey(request,'evidence'))
-    .then(evidence => data.evidence = evidence)
-    .then (()=> extractBodyKey(request,'description'))
-    .then( description => data.description = description)
-	.then(() => persistence.insertReportData(data))
-	.then(data => {callback(null,data)})
-	.catch( err => {callback(err)})
-}
-
 exports.insertData = (request, callback) => {
     let data = {}
 	extractBodyKey(request, 'name')
@@ -99,3 +81,60 @@ exports.getlovechina = (request, datagf) => new Promise( (resolve, reject) => {
 	resolve({results: clean})
 })
 //end of get lovechina field
+
+
+//love hk part
+exports.getlovehkbytype = (request, callback) => {
+    extractParam(request, 'type')
+	.then( type => persistence.getlovehkdetailtype(type))
+	.then( lovechina => this.getlovechina(request, lovechina))
+	.then( lovechina => callback(null, lovechina))
+	.catch( err => callback(err))
+}
+
+exports.getlovehkbyname = (request, callback) => {
+    extractParam(request, 'name')
+	.then( name => persistence.getlovehkDetailname(name))
+	.then( lovechina => this.getlovechina(request, lovechina))
+	.then( lovechina => callback(null, lovechina))
+	.catch( err => callback(err))
+}
+
+exports.getlovehkbyXY = (request, callback) => {
+    let data = {}
+    extractParam(request, 'X')
+    .then(X => data.X = X)
+    .then(()=> {
+        return extractParam(request, 'Y')
+    })
+    .then (Y => data.Y = Y)
+    .then(()=>persistence.getlovehkDetailXY(data))
+	.then( lovechina => this.getlovechina(request, lovechina))
+	.then( lovechina => callback(null, lovechina))
+	.catch( err => callback(err))
+}
+
+exports.reportData = (request, callback) => {
+    let data = {}
+	extractBodyKey(request, 'name')
+	.then(name => data.name = name)
+	.then (()=> extractBodyKey(request,'address'))
+	.then(address => data.address = address)
+	.then (()=>  extractBodyKey(request,'type'))
+	.then(type => data.type = type)
+	.then (()=> extractBodyKey(request,'evidence'))
+    .then(evidence => data.evidence = evidence)
+    .then (()=> extractBodyKey(request,'X'))
+    .then(X => data.X = X)
+    .then (()=> extractBodyKey(request,'Y'))
+    .then(Y => data.Y = Y)
+    .then( () => extractBodyKey(request,'description'))
+    .then(description => data.description = description)
+    .then(() => persistence.checkHKdata(data))
+	.then(checker => persistence.insertHKData(data,checker))
+	.then(data => {callback(null,data)})
+	.catch( err => {callback(err)})
+}
+
+
+//end of love hk part (copy and paste=.=)

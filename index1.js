@@ -7,7 +7,7 @@ const csv=require('csvtojson')
 csv({
 	colParser:{
 		"X":"Number",
-		"Y":"Number"
+		"Y":"Number",
 		}
 })
 .fromFile(csvFilePath)

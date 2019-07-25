@@ -74,7 +74,72 @@ server.get('/lovechinabyXY', (req, res) => {
 })
 //end of search
 
-//report scheme (被借刀/澄清專用, ADMIN拎唔拎走佢既事)
+//Insert Data (比你班友仔submit)
+server.post('/lovechinainsert', (req, res) => {
+	lovechina.insertData(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'POST')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+
+
+
+
+
+//love Hong Kong
+
+//search by type
+server.get('/lovehkbytype', (req, res) => {
+	lovechina.getlovehkbytype(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//end of search by type
+
+//search by partial name
+server.get('/lovehkbyname', (req, res) => {
+	lovechina.getlovehkbyname(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//end of search by partial name
+
+//search by X and Y(周圍的野)
+server.get('/lovehkXY', (req, res) => {
+	lovechina.getlovehkbyXY(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//end of search
+
+//report scheme (被借刀/澄清專用, ADMIN拎唔拎走佢既事) (LOVE HONG KONG)
 server.post('/lovechinareport', (req, res) => {
 	lovechina.reportData(req, (err, data) => {
 		res.setHeader('content-type', 'application/json')
@@ -89,20 +154,6 @@ server.post('/lovechinareport', (req, res) => {
 })
 
 //end of report scheme
-
-//Insert Data (比你班友仔submit)
-server.post('/lovechinainsert', (req, res) => {
-	lovechina.insertData(req, (err, data) => {
-		res.setHeader('content-type', 'application/json')
-		res.setHeader('accepts', 'POST')
-		if (err) {
-			res.send(status.badRequest, {error: err.message})
-		} else {
-			res.send(status.ok, data)
-		}
-		res.end()
-	})
-})
 
 //end of insert data 
 
