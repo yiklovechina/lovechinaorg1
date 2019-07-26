@@ -189,6 +189,35 @@ server.post('/Viewhkbyadmin', (req, res) => {
 })
 //display all "F" end
 
+//update "F" to "T"
+server.put('/updatechinabyadmin', (req, res) => {
+	lovechina.updatechina(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'PUT')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+
+server.put('/updatehkbyadmin', (req, res) => {
+	lovechina.updatehk(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'PUT')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//update "F" to "T"
+
+
 
 
 

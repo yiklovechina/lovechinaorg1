@@ -277,6 +277,38 @@ exports.getlovehkF = () => new Promise( (resolve, reject) => {
 //View HK "F"
 
 
+//update china & hk "F"
+
+//update => "n" "nmodified" "ok"
+// no update = nmodified = 0
+exports.updatecn = data => new Promise( (resolve, reject) => {
+    if (!'name' in data && !'X' in data && !'Y' in data) {
+        reject(new Error('invalid object'))
+    }
+    data.X = (data.X == '') ? 0 : data.X
+    data.Y = (data.Y == '') ? 0 : data.Y
+	schema.LoveChina.updateOne({$and:[{name:data.name},{X:data.X},{Y:data.Y}]}, {status:"T"},(err, docs) => {
+        if (err) reject(new Error('database error'))
+		resolve(docs)
+	})
+})
+
+exports.updatehk = data => new Promise( (resolve, reject) => {
+    if (!'name' in data && !'X' in data && !'Y' in data) {
+        reject(new Error('invalid object'))
+    }
+    data.X = (data.X == '') ? 0 : data.X
+    data.Y = (data.Y == '') ? 0 : data.Y
+	schema.Lovehk.updateOne({$and:[{name:data.name},{X:data.X},{Y:data.Y}]}, {status:"T"},(err, docs) => {
+		if (err) reject(new Error('database error'))
+		resolve(docs)
+	})
+})
+
+
+
+//update hk &china "F"
+
 //add ac
 // exports.addAccount = details => new Promise( (resolve, reject) => {
 // 	if (!'username' in details && !'password' in details ){

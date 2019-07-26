@@ -182,6 +182,74 @@ exports.viewhk = (request, callback) => {
 
 }
 
+//update china & hk ("F")
+exports.updatechina = (request, callback) => {
+    let data = {}
+    auth.getHeaderCredentials(request).then( credentials => {
+        this.username = credentials.Account
+        this.password = credentials.password
+        return auth.hashPassword(credentials)
+        }).then(credentials => {
+            return persistence.getCredentials(credentials)
+        }).then( account => {
+            const hash = account[0].password
+            return auth.checkPassword(this.password, hash)
+        }).then( () => {
+            return extractBodyKey(request, 'name')
+        }).then( name => {
+            data.name = name
+        }).then( () => {
+            return extractBodyKey(request, 'X')
+        }).then( X => {
+            data.X = X
+        }).then( () => {
+            return extractBodyKey(request, 'Y')
+        }).then( Y => {
+            data.Y = Y
+        }).then(()=>{
+            return persistence.updatecn(data)
+        }).then(data => {
+            callback(null,data)
+        }).catch( err => {
+            callback(err)
+        })
+    }
+
+    exports.updatehk = (request, callback) => {
+        let data = {}
+        auth.getHeaderCredentials(request).then( credentials => {
+            this.username = credentials.Account
+            this.password = credentials.password
+            return auth.hashPassword(credentials)
+            }).then(credentials => {
+                return persistence.getCredentials(credentials)
+            }).then( account => {
+                const hash = account[0].password
+                return auth.checkPassword(this.password, hash)
+            }).then( () => {
+                return extractBodyKey(request, 'name')
+            }).then( name => {
+                data.name = name
+            }).then( () => {
+                return extractBodyKey(request, 'X')
+            }).then( X => {
+                data.X = X
+            }).then( () => {
+                return extractBodyKey(request, 'Y')
+            }).then( Y => {
+                data.Y = Y
+            }).then(()=>{
+                return persistence.updatehk(data)
+            }).then(data => {
+                callback(null,data)
+            }).catch( err => {
+                callback(err)
+            })
+        }
+//update china & hk ("F")
+
+
+
 
 //end
 // exports.addac = (request, callback) => {
