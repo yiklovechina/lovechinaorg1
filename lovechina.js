@@ -1,4 +1,5 @@
 const persistence = require('./modules/persistence')
+const auth = require('./modules/authorisation')
 
 exports.getDetaillbytype = (request, callback) => {
     extractParam(request, 'type')
@@ -135,6 +136,30 @@ exports.reportData = (request, callback) => {
 	.then(data => {callback(null,data)})
 	.catch( err => {callback(err)})
 }
-
-
 //end of love hk part (copy and paste=.=)
+
+//View china & hk by admin
+exports.viewchina = (request, callback) => {
+    
+	
+}
+exports.viewhk = (request, callback) => {
+    
+}
+
+exports.addac = (request, callback) => {
+	let data
+	auth.getHeaderCredentials(request).then( credentials => {
+		return auth.hashPassword(credentials)
+	}).then( credentials => {
+		data = credentials
+    }).then(()=>{
+		return persistence.addAccount(data)
+	}).then( data => {
+		callback(null, data)
+	}).catch( err => {
+		callback(err)
+	})
+}
+
+//end of view

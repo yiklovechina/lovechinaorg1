@@ -259,5 +259,21 @@ exports.checkHKdata = datalist => new Promise ((resolve,reject) => {
 
 
 
+//add ac
+exports.addAccount = details => new Promise( (resolve, reject) => {
+	if (!'username' in details && !'password' in details ){
+		reject(new Error('invalid user object'))
+	}
+	const ac = new schema.ac(details)
+
+	ac.save( (err, ac) => {
+		if (err) {
+			reject(new Error('error creating account'))
+		}
+		delete details.password
+		resolve(details)
+	})
+})
+//first add ac
 
 

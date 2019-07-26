@@ -153,13 +153,59 @@ server.post('/lovechinareport', (req, res) => {
 	})
 })
 
+
 //end of report scheme
 
 //end of insert data 
 
 //server remove
-//view by admin 
 //^_^
+
+//display all "F" for admin lovehk love china
+server.post('/Viewchinabyadmin', (req, res) => {
+	lovechina.viewchina(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'POST')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+
+server.post('Viewhkbyadmin', (req, res) => {
+	lovechina.viewhk(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'POST')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+
+server.post('addac', (req,res) => {
+	lovechina.addac(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'POST')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+
+//display all "F" for admin 
+
+
+
+
 
 
 

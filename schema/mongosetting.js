@@ -31,4 +31,11 @@ const lovehkschema = new Schema({
         description: Array,
         status: String
 })
+
 exports.Lovehk = mongoose.model('Lovehk',lovehkschema)
+
+const ac = new Schema({
+        Account:String,
+        password:String
+})
+exports.ac = mongoose.model('ac',ac)
