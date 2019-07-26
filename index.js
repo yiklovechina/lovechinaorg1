@@ -175,7 +175,7 @@ server.post('/Viewchinabyadmin', (req, res) => {
 	})
 })
 
-server.post('Viewhkbyadmin', (req, res) => {
+server.post('/Viewhkbyadmin', (req, res) => {
 	lovechina.viewhk(req, (err, data) => {
 		res.setHeader('content-type', 'application/json')
 		res.setHeader('accepts', 'POST')
@@ -187,19 +187,25 @@ server.post('Viewhkbyadmin', (req, res) => {
 		res.end()
 	})
 })
+//display all "F" end
 
-server.post('addac', (req,res) => {
-	lovechina.addac(req, (err, data) => {
-		res.setHeader('content-type', 'application/json')
-		res.setHeader('accepts', 'POST')
-		if (err) {
-			res.send(status.badRequest, {error: err.message})   
-		} else {
-			res.send(status.ok, data)
-		}
-		res.end()
-	})
-})
+
+
+
+
+// add ac 888888
+// server.post('addac', (req,res) => {
+// 	lovechina.addac(req, (err, data) => {
+// 		res.setHeader('content-type', 'application/json')
+// 		res.setHeader('accepts', 'POST')
+// 		if (err) {
+// 			res.send(status.badRequest, {error: err.message})   
+// 		} else {
+// 			res.send(status.ok, data)
+// 		}
+// 		res.end()
+// 	})
+// })
 
 //display all "F" for admin 
 

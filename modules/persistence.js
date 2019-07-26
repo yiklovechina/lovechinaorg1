@@ -259,21 +259,48 @@ exports.checkHKdata = datalist => new Promise ((resolve,reject) => {
 
 
 
-//add ac
-exports.addAccount = details => new Promise( (resolve, reject) => {
-	if (!'username' in details && !'password' in details ){
-		reject(new Error('invalid user object'))
-	}
-	const ac = new schema.ac(details)
-
-	ac.save( (err, ac) => {
-		if (err) {
-			reject(new Error('error creating account'))
-		}
-		delete details.password
-		resolve(details)
+//View China  "F"
+exports.getlovechinaF = () => new Promise( (resolve, reject) => {
+	schema.LoveChina.find({status:"F"}, (err, docs) => {
+		if (err) reject(new Error('database error'))
+		resolve(docs)
 	})
 })
+
+exports.getlovehkF = () => new Promise( (resolve, reject) => {
+	schema.Lovehk.find({status:"F"}, (err, docs) => {
+		if (err) reject(new Error('database error'))
+		resolve(docs)
+	})
+})
+
+//View HK "F"
+
+
+//add ac
+// exports.addAccount = details => new Promise( (resolve, reject) => {
+// 	if (!'username' in details && !'password' in details ){
+// 		reject(new Error('invalid user object'))
+// 	}
+// 	const ac = new schema.ac(details)
+
+// 	ac.save( (err, ac) => {
+// 		if (err) {
+// 			reject(new Error('error creating account'))
+// 		}
+// 		delete details.password
+// 		resolve(details)
+// 	})
+// })
 //first add ac
 
+//get ac
+exports.getCredentials = credentials => new Promise( (resolve, reject) => {
+	schema.ac.find({Account: credentials.Account}, (err, docs) => {
+		if (err) reject(new Error('database error'))
+		if (docs.length) resolve(docs)
+		reject(new Error(`invalid username`))
+	})
+})
+//get ac
 

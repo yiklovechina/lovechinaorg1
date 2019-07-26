@@ -140,26 +140,64 @@ exports.reportData = (request, callback) => {
 
 //View china & hk by admin
 exports.viewchina = (request, callback) => {
+    auth.getHeaderCredentials(request).then( credentials => {
+	this.username = credentials.Account
+    this.password = credentials.password
+    return auth.hashPassword(credentials)
+    }).then(credentials => {
+		return persistence.getCredentials(credentials)
+	}).then( account => {
+		const hash = account[0].password
+		return auth.checkPassword(this.password, hash)
+	}).then(() => persistence.getlovechinaF()
+     ).then( lovechina => this.getlovechina(request, lovechina))
+      .then( lovechina => callback(null, lovechina))
+      .then(data => {
+		callback(null,data)
+	    }).catch( err => {
+		callback(err)
+	})
+
     
 	
 }
 exports.viewhk = (request, callback) => {
-    
+    auth.getHeaderCredentials(request).then( credentials => {
+        this.username = credentials.Account
+        this.password = credentials.password
+        return auth.hashPassword(credentials)
+        }).then(credentials => {
+            return persistence.getCredentials(credentials)
+        }).then( account => {
+            const hash = account[0].password
+            return auth.checkPassword(this.password, hash)
+        }).then(() => persistence.getlovehkF()
+         ).then( lovechina => this.getlovechina(request, lovechina))
+          .then( lovechina => callback(null, lovechina))
+          .then(data => {
+            callback(null,data)
+            }).catch( err => {
+            callback(err)
+        })
+
 }
 
-exports.addac = (request, callback) => {
-	let data
-	auth.getHeaderCredentials(request).then( credentials => {
-		return auth.hashPassword(credentials)
-	}).then( credentials => {
-		data = credentials
-    }).then(()=>{
-		return persistence.addAccount(data)
-	}).then( data => {
-		callback(null, data)
-	}).catch( err => {
-		callback(err)
-	})
-}
+
+//end
+// exports.addac = (request, callback) => {
+// 	let data
+// 	auth.getHeaderCredentials(request).then( credentials => {
+// 		return auth.hashPassword(credentials)
+// 	}).then( credentials => {
+// 		data = credentials
+//     }).then(()=>{
+// 		return persistence.addAccount(data)
+// 	}).then( data => {
+// 		callback(null, data)
+// 	}).catch( err => {
+// 		callback(err)
+// 	})
+// }
+//end add ac
 
 //end of view
