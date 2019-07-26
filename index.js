@@ -140,7 +140,7 @@ server.get('/lovehkXY', (req, res) => {
 //end of search
 
 //report scheme (被借刀/澄清專用, ADMIN拎唔拎走佢既事) (LOVE HONG KONG)
-server.post('/lovechinareport', (req, res) => {
+server.post('/lovehkinsert', (req, res) => {
 	lovechina.reportData(req, (err, data) => {
 		res.setHeader('content-type', 'application/json')
 		res.setHeader('accepts', 'POST')
@@ -218,6 +218,33 @@ server.put('/updatehkbyadmin', (req, res) => {
 //update "F" to "T"
 
 
+//delete hk and china
+server.del('/delchinabyadmin', (req, res) => {
+	lovechina.delchina(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'DELETE')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+
+server.del('/delhkbyadmin', (req, res) => {
+	lovechina.delhk(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'DELETE')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//delete hk and china
 
 
 

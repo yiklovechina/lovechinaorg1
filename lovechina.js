@@ -248,7 +248,71 @@ exports.updatechina = (request, callback) => {
         }
 //update china & hk ("F")
 
+//delete china & hk
+exports.delchina = (request, callback) => {
+    let data = {}
+    auth.getHeaderCredentials(request).then( credentials => {
+        this.username = credentials.Account
+        this.password = credentials.password
+        return auth.hashPassword(credentials)
+        }).then(credentials => {
+            return persistence.getCredentials(credentials)
+        }).then( account => {
+            const hash = account[0].password
+            return auth.checkPassword(this.password, hash)
+        }).then( () => {
+            return extractBodyKey(request, 'name')
+        }).then( name => {
+            data.name = name
+        }).then( () => {
+            return extractBodyKey(request, 'X')
+        }).then( X => {
+            data.X = X
+        }).then( () => {
+            return extractBodyKey(request, 'Y')
+        }).then( Y => {
+            data.Y = Y
+        }).then(()=>{
+            return persistence.delcn(data)
+        }).then(data => {
+            callback(null,data)
+        }).catch( err => {
+            callback(err)
+        })
+    }
 
+    exports.delhk = (request, callback) => {
+        let data = {}
+        auth.getHeaderCredentials(request).then( credentials => {
+            this.username = credentials.Account
+            this.password = credentials.password
+            return auth.hashPassword(credentials)
+            }).then(credentials => {
+                return persistence.getCredentials(credentials)
+            }).then( account => {
+                const hash = account[0].password
+                return auth.checkPassword(this.password, hash)
+            }).then( () => {
+                return extractBodyKey(request, 'name')
+            }).then( name => {
+                data.name = name
+            }).then( () => {
+                return extractBodyKey(request, 'X')
+            }).then( X => {
+                data.X = X
+            }).then( () => {
+                return extractBodyKey(request, 'Y')
+            }).then( Y => {
+                data.Y = Y
+            }).then(()=>{
+                return persistence.delhk(data)
+            }).then(data => {
+                callback(null,data)
+            }).catch( err => {
+                callback(err)
+            })
+        }
+//delete china & hk
 
 
 //end

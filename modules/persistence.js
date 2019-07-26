@@ -304,10 +304,35 @@ exports.updatehk = data => new Promise( (resolve, reject) => {
 		resolve(docs)
 	})
 })
-
-
-
 //update hk &china "F"
+
+
+
+// delete part
+exports.delcn = data => new Promise( (resolve, reject) => {
+    if (!'name' in data && !'X' in data && !'Y' in data) {
+        reject(new Error('invalid object'))
+    }
+    data.X = (data.X == '') ? 0 : data.X
+    data.Y = (data.Y == '') ? 0 : data.Y
+	schema.LoveChina.deleteOne({$and:[{name:data.name},{X:data.X},{Y:data.Y}]},(err, docs) => {
+        if (err) reject(new Error('database error'))
+		resolve(docs)
+	})
+})
+
+exports.delhk = data => new Promise( (resolve, reject) => {
+    if (!'name' in data && !'X' in data && !'Y' in data) {
+        reject(new Error('invalid object'))
+    }
+    data.X = (data.X == '') ? 0 : data.X
+    data.Y = (data.Y == '') ? 0 : data.Y
+	schema.Lovehk.deleteOne({$and:[{name:data.name},{X:data.X},{Y:data.Y}]},(err, docs) => {
+		if (err) reject(new Error('database error'))
+		resolve(docs)
+	})
+})
+//delete part
 
 //add ac
 // exports.addAccount = details => new Promise( (resolve, reject) => {
