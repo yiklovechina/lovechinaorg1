@@ -17,6 +17,7 @@ server.opts(/.*/, function (req,res,next) {
     return next();
 });
 const lovechina = require('./lovechina.js')
+const lovetype = require('./lovetype.js')
 const status = {
 	ok: 200,
 	added: 201,
@@ -264,20 +265,47 @@ server.del('/delhkbyadmin', (req, res) => {
 // })
 
 //display all "F" for admin 
-
-
-
-
-
-
-
 //end 
 
 
-
-
-
-
+//control category of the org
+server.get('/type', (req,res) => {
+	lovetype.gettype(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET , UPDATE, DELETE')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+server.put('/type', (req,res) => {
+	lovetype.updatetype(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET , UPDATE, DELETE')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+server.del('type', (req,res) => {
+	lovetype.deltype(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET , UPDATE, DELETE')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})   
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//control category of the org end
 
 
 

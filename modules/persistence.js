@@ -361,3 +361,42 @@ exports.getCredentials = credentials => new Promise( (resolve, reject) => {
 })
 //get ac
 
+
+
+//get type
+exports.getlovechinatype = () => new Promise( (resolve, reject) => {
+	schema.LoveChina.distinct(("type"), (err, docs) => {
+        if (err) reject(new Error('database error'))
+        // docs.map(element => {
+        //   data2.push(element)
+        //   console.log(element)
+        // })
+        resolve(docs)
+    })
+})
+exports.getlovehktype = () => new Promise( (resolve, reject) => {
+	schema.Lovehk.distinct(("type"), (err, docs) => {
+        if (err) reject(new Error('database error'))
+        resolve(docs)
+    })
+})
+//end of get type
+
+//update type
+exports.updatetype = data => new Promise( (resolve, reject) => {
+	schema.LoveChina.distinct(("type"), (err, docs) => {
+        if (err) reject(new Error('database error'))
+        console.log(docs)
+		resolve(docs)
+	})
+})
+
+exports.updatehktype = data => new Promise( (resolve, reject) => {
+	schema.LoveChina.distinct(("type"), (err, docs) => {
+        if (err) reject(new Error('database error'))
+        console.log(docs)
+		resolve(docs)
+	})
+})
+
+//end of update type
