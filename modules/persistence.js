@@ -20,8 +20,7 @@ exports.getlovechinaDetailname = name => new Promise( (resolve, reject) => {
 
 // Number Type can not search by normal method
 exports.getlovechinaDetailXY = data => new Promise( (resolve, reject) => {
-    console.log(data.X)
-    console.log(data.Y)
+    if (data.type == "All") {
     schema.LoveChina.find({$and:[{
     X: {
     $gte: parseFloat(data.X) - 0.02,
@@ -30,12 +29,27 @@ exports.getlovechinaDetailXY = data => new Promise( (resolve, reject) => {
     $gte: parseFloat(data.Y) - 0.02,
     $lt: parseFloat(data.Y) + 0.02
 }, status: "T"
-}]} 
+}]}
     , (err, docs) => {
         if (err) reject(new Error('database error'))
-        console.log(docs)
 		resolve(docs)
     })
+//All or not
+} else {
+    schema.LoveChina.find({$and:[{
+        X: {
+        $gte: parseFloat(data.X) - 0.02,
+        $lt: parseFloat(data.X) + 0.02
+    }, Y: {
+        $gte: parseFloat(data.Y) - 0.02,
+        $lt: parseFloat(data.Y) + 0.02
+    }, status: "T", type: data.type
+    }]}
+        , (err, docs) => {
+            if (err) reject(new Error('database error'))
+            resolve(docs)
+        })
+}
     
 })
 
@@ -48,7 +62,7 @@ exports.insertData = (details,checker) => new Promise( (resolve, reject) => {
         details.Y = (details.Y == '') ? '0' : details.Y
         details.status = "F"
         if (checker) {
-            console.log("Insert Data 1 with true")
+          //  console.log("Insert Data 1 with true")
         const LoveChina = new schema.LoveChina(details)
         LoveChina.save((err,LoveChina) => {
             if (err) {
@@ -154,8 +168,8 @@ exports.getlovehkDetailname = name => new Promise( (resolve, reject) => {
 
 // Number Type can not search by normal method
 exports.getlovehkDetailXY = data => new Promise( (resolve, reject) => {
-    console.log(data.X)
-    console.log(data.Y)
+
+    if (data.type == "All") {
     schema.Lovehk.find({$and:[{
     X: {
     $gte: parseFloat(data.X) - 0.02,
@@ -167,9 +181,26 @@ exports.getlovehkDetailXY = data => new Promise( (resolve, reject) => {
 }]} 
     , (err, docs) => {
         if (err) reject(new Error('database error'))
-        console.log(docs)
+        //console.log(docs)
 		resolve(docs)
     })
+
+} else {
+    schema.Lovehk.find({$and:[{
+        X: {
+        $gte: parseFloat(data.X) - 0.02,
+        $lt: parseFloat(data.X) + 0.02
+    }, Y: {
+        $gte: parseFloat(data.Y) - 0.02,
+        $lt: parseFloat(data.Y) + 0.02
+    }, status: "T", type:data.type
+    }]} 
+        , (err, docs) => {
+            if (err) reject(new Error('database error'))
+            //console.log(docs)
+            resolve(docs)
+        })
+}
     
 })
 

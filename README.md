@@ -1,9 +1,12 @@
+
+
+
 lovechinabytype (GET) TYPE 
 lovechinabyname (GET) NAME 
-lovechinabyXY (GET) X , Y 
+lovechinabyXY (GET) X , Y  & type (All,other)
 lovehkbytype (GET) TYPE 
 lovehkbyname (GET) Name 
-lovehkXY (GET) X,Y 
+lovehkXY (GET) X,Y  & type (All,other)
 (status:T)才會Display
 {
     "result":[
@@ -37,7 +40,7 @@ Viewhkbyadmin   (POST) user + pass
             "type" : String
             "evidence": Array [String,String]
             "X": Number
-            "Y":Number
+            "Y":Numbergi
             "description": Array [String,String]
         },
         ....

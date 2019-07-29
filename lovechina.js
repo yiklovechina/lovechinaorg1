@@ -25,6 +25,8 @@ exports.getDetailbyXY = (request, callback) => {
         return extractParam(request, 'Y')
     })
     .then (Y => data.Y = Y)
+    .then( () => { return extractParam(request,'type')})
+    .then(type => data.type = type)
     .then(()=>persistence.getlovechinaDetailXY(data))
 	.then( lovechina => this.getlovechina(request, lovechina))
 	.then( lovechina => callback(null, lovechina))
@@ -109,6 +111,9 @@ exports.getlovehkbyXY = (request, callback) => {
         return extractParam(request, 'Y')
     })
     .then (Y => data.Y = Y)
+    .then( () => { return extractParam(request,'type')})
+    .then( type => data.type = type)
+    
     .then(()=>persistence.getlovehkDetailXY(data))
 	.then( lovechina => this.getlovechina(request, lovechina))
 	.then( lovechina => callback(null, lovechina))
