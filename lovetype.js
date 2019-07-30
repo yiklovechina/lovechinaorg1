@@ -4,20 +4,12 @@ const auth = require('./modules/authorisation')
 exports.gettype = (request, callback) => {
     let data1 = []
     let data2 = []
-    auth.getHeaderCredentials(request).then( credentials => {
-        this.username = credentials.Account
-        this.password = credentials.password
-        return auth.hashPassword(credentials)
-        }).then(credentials => {
-            return persistence.getCredentials(credentials)
-        }).then( account => {
-            const hash = account[0].password
-            return auth.checkPassword(this.password, hash)
-        }).then(() => persistence.getlovechinatype()
-         ).then( lovetype => data1 = lovetype)
+         persistence.getlovechinatype()
+         .then( lovetype => data1 = lovetype)
           .then (() => persistence.getlovehktype())
           .then( lovehktype => data2 = lovehktype)
-          .then( () => data1.concat(data2.filter(function (item){ return data1.indexOf(item)<0})))
+         // .then( () => data1.concat(data2.filter(function (item){ return data1.indexOf(item)<0})))
+          .then(()=> this.returntypearray(request,data1,data2))
           .then( data1 => callback(null, data1))
           .then( data2 => callback(null,data2))
           .then(data => {
@@ -27,6 +19,13 @@ exports.gettype = (request, callback) => {
         })
 
 }
+
+//get lovechina field
+exports.returntypearray = (request, data1,data2) => new Promise( (resolve, reject) => {
+    let data3 = data1.concat(data2.filter(function (item){return data1.indexOf(item) <0}));
+	resolve({type: data3})
+})
+//end of get lovechina field
 
 exports.updatetype = (request, callback) => {
     let data = {}

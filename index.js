@@ -23,7 +23,7 @@ const status = {
 	added: 201,
 	badRequest: 400
 }
-const defaultPort = 8000
+const defaultPort = 8080
 
 server.get('/', (req, res, next) => {
 	res.redirect('/lovechina', next)

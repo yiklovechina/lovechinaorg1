@@ -68,10 +68,11 @@ exports.insertData = (details,checker) => new Promise( (resolve, reject) => {
             if (err) {
                 reject (new Error(err))
             }
-            resolve("Successful")
+            resolve({data:"Successful"})
         })
     } else {
         //checked duplicate
+      
         //added description,evidence 'array type to database
         schema.LoveChina.update({$and:[
             { name: new RegExp(details.name,"i"),
@@ -85,7 +86,7 @@ exports.insertData = (details,checker) => new Promise( (resolve, reject) => {
              }
          }]}, { $push: { evidence: details.evidence, description:details.description} } ,(err, docs) => {
             if (err) reject(new Error(err))
-           resolve("Due to the duplicated data, Only the description and evidence will be import")
+           resolve({data:"Due to the duplicated data, Only the description and evidence will be import"})
         })
     }
     }       
@@ -219,7 +220,7 @@ exports.insertHKData = (details,checker) => new Promise( (resolve, reject) => {
             if (err) {
                 reject (new Error(err))
             }
-            resolve("Successful")
+            resolve({data:"Successful"})
         })
     } else {
         //checked duplicate
@@ -236,7 +237,7 @@ exports.insertHKData = (details,checker) => new Promise( (resolve, reject) => {
              }
          }]}, { $push: { evidence: details.evidence, description:details.description} } ,(err, docs) => {
             if (err) reject(new Error(err))
-           resolve("Due to the duplicated data, Only the description and evidence will be import")
+           resolve({data:"Due to the duplicated data, Only the description and evidence will be import"})
         })
     }
     }       

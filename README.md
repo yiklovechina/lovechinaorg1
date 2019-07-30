@@ -22,6 +22,9 @@ lovehkXY (GET) X,Y  & type (All,other)
         ....
     ]
 }
+
+
+//address need geoapi
 lovechinainsert (POST) , name, address , type, evidence, X, Y, description
 lovehkinsert (POST) , name, address , type, evidence, X, Y, description
 
@@ -66,5 +69,20 @@ delhkbyadmin(DELETE) user + pass + name + X + Y
     "deletedCount": 1 (如字面解釋)
 }
 
+
+/type - GET Method //noneed user format = 
+{
+    "type":[
+        
+    ]
+}
+/type - put //need user
+/type - del //need user
+
+
+
+
+
+***Let's go Android part ***
 
 
