@@ -17,7 +17,21 @@ exports.getlovechinaDetailname = name => new Promise( (resolve, reject) => {
 		resolve(docs)
 	})
 })
-
+//get type and name
+exports.getlovechinaDetailtypename = data => new Promise( (resolve, reject) => {
+    if (data.type ==="All"){
+        schema.LoveChina.find({$and:[{status:"T"},{name:new RegExp(data.name,"i")}]}, (err, docs) => {
+            if (err) reject(new Error('database error'))
+            resolve(docs)
+        })
+    } else {
+	schema.LoveChina.find({$and:[{type:data.type}, {status:"T"},{name:new RegExp(data.name,"i")}]}, (err, docs) => {
+		if (err) reject(new Error('database error'))
+		resolve(docs)
+    })
+    }
+})
+//gete type and name
 // Number Type can not search by normal method
 exports.getlovechinaDetailXY = data => new Promise( (resolve, reject) => {
     if (data.type == "All") {
@@ -150,6 +164,20 @@ exports.insertReportData = details => new Promise( (resolve, reject) => {
             resolve("Successful")
         })
     }
+})
+
+exports.getlovehkdetailtypename = data => new Promise( (resolve, reject) => {
+    if (data.type == "All") {
+        schema.Lovehk.find({$and:[{name:new RegExp(data.name,"i")}, {status:"T"}]}, (err, docs) => {
+            if (err) reject(new Error('database error'))
+            resolve(docs)
+        })
+    } else {
+	schema.Lovehk.find({$and:[{type:data.type}, {status:"T"},{name:new RegExp(data.name,"i")}]}, (err, docs) => {
+		if (err) reject(new Error('database error'))
+		resolve(docs)
+    })
+}
 })
 
 

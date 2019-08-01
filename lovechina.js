@@ -1,6 +1,20 @@
 const persistence = require('./modules/persistence')
 const auth = require('./modules/authorisation')
 
+//get type and name
+exports.getDetaillbytypename = (request, callback) => {
+    let data = {}
+    extractParam(request, 'type')
+    .then(type => data.type = type)
+    .then(()=>{ return extractParam(request,'name')})
+    .then(name => data.name = name)
+	.then( ()=> persistence.getlovechinaDetailtypename(data))
+	.then( lovechina => this.getlovechina(request, lovechina))
+	.then( lovechina => callback(null, lovechina))
+	.catch( err => callback(err))
+}
+//get type and name
+
 exports.getDetaillbytype = (request, callback) => {
     extractParam(request, 'type')
 	.then( type => persistence.getlovechinaDetailtype(type))
@@ -87,6 +101,17 @@ exports.getlovechina = (request, datagf) => new Promise( (resolve, reject) => {
 
 
 //love hk part
+exports.getlovehkbytypename = (request, callback) => {
+    let data = {}
+    extractParam(request, 'type')
+    .then(type => data.type = type)
+    .then(()=> {return extractParam(request,'name')})
+    .then(name => data.name= name )
+	.then(() => persistence.getlovehkdetailtypename(data))
+	.then( lovechina => this.getlovechina(request, lovechina))
+	.then( lovechina => callback(null, lovechina))
+	.catch( err => callback(err))
+}
 exports.getlovehkbytype = (request, callback) => {
     extractParam(request, 'type')
 	.then( type => persistence.getlovehkdetailtype(type))

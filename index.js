@@ -30,6 +30,21 @@ server.get('/', (req, res, next) => {
 })
 
 //start 
+//search by type + name
+server.get('/lovechinabytypename', (req, res) => {
+	lovechina.getDetaillbytypename(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//search china by type + name
+
 //search by type
 server.get('/lovechinabytype', (req, res) => {
 	lovechina.getDetaillbytype(req, (err, data) => {
@@ -94,7 +109,20 @@ server.post('/lovechinainsert', (req, res) => {
 
 
 //love Hong Kong
-
+//search by type & name
+server.get('/lovehkbytypename', (req, res) => {
+	lovechina.getlovehkbytypename(req, (err, data) => {
+		res.setHeader('content-type', 'application/json')
+		res.setHeader('accepts', 'GET')
+		if (err) {
+			res.send(status.badRequest, {error: err.message})
+		} else {
+			res.send(status.ok, data)
+		}
+		res.end()
+	})
+})
+//search hk by type & name
 //search by type
 server.get('/lovehkbytype', (req, res) => {
 	lovechina.getlovehkbytype(req, (err, data) => {

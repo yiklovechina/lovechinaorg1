@@ -7,6 +7,10 @@ lovechinabyXY (GET) X , Y  & type (All,other)
 lovehkbytype (GET) TYPE 
 lovehkbyname (GET) Name 
 lovehkXY (GET) X,Y  & type (All,other)
+
+lovechinabytypename?(GET) Type and name
+lovehkbytypename?(GET) type and name
+
 (status:T)才會Display
 {
     "result":[
